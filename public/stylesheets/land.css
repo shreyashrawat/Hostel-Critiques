@@ -1,0 +1,20 @@
+#content{
+	text-align: center;
+	background-position: center;
+	padding-top: 35%;
+}
+body{
+	background: url(https://dcmep4q5dgnih.cloudfront.net/wp-content/uploads/2017/03/16151451/slider.jpg);
+	background-size: cover;
+	background-position: center;
+	font-family: 'Lato';
+	font-weight: bolder;
+	color: white;
+}
+html{
+	height: 100%;
+}
+h1{
+	font-weight: 700;
+	font-size: 5em;
+}

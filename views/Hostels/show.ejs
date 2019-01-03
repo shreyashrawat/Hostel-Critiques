@@ -1,0 +1,52 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Hostel Critiques</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= hostel.image %>">
+                <div class="caption-full">
+                    <h4 class="pull-right">5/10</h4>
+                    <h4><a><%=hostel.name%></a></h4>
+                    <p><%= hostel.description %></p>
+                </div>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/hostels/<%=hostel._id %>/comments/new">Add New Comment</a>
+                </div>
+                <hr>
+                <% hostel.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author.username %></strong>
+                            <span class="pull-right">10 days ago</span>
+                            <div><strong>Rating: <%= comment.rating %></strong></div>
+                            <p>
+                                <%= comment.text %> 
+                            </p>
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+	                            
+	                            <form id="delete-form" action="/hostels/<%=hostel._id%>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+	                            	<a class="btn btn-xs btn-warning" 
+	                               href="/hostels/<%=hostel._id %>/comments/<%=comment._id %>/edit">Edit</a>
+	                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+	                            </form>
+                        	<% } %>
+                        </div>
+                    </div>
+                    <hr>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
