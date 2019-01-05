@@ -1,6 +1,7 @@
 var express = require("express");
 var router  = express.Router({mergeParams: true});
 var Hostel = require("../models/hostel");
+var Hostel_f = require("../models/hostel_f");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
@@ -8,20 +9,36 @@ var middleware = require("../middleware");
 //Comments New
 router.get("/new", middleware.isLoggedIn, function(req, res){
     // find campground by id
-    console.log(req.params.id);
-    Hostel.findById(req.params.id, function(err, hostel){
+    if(res.locals.currentUser.gender == 'M')
+    {
+      Hostel.findById(req.params.id, function(err, hostel){
         if(err){
             console.log(err);
         } else {
              res.render("Comments/new", {hostel: hostel});
         }
-    })
-});
+      })
+    }
+    else{
+      Hostel_f.findById(req.params.id, function(err, hostel){
+        if(err){
+            console.log(err);
+        } else {
+             res.render("Comments/new", {hostel: hostel});
+        }
+      })
+
+    }
+});  
+    
+    
 
 //Comments Create
 router.post("/",middleware.isLoggedIn,function(req, res){
    //lookup campground using ID
-   Hostel.findById(req.params.id, function(err, hostel){
+   if(res.locals.currentUser.gender == 'M')
+   {
+      Hostel.findById(req.params.id, function(err, hostel){
        if(err){
            console.log(err);
            res.redirect("/hostels");
@@ -41,11 +58,37 @@ router.post("/",middleware.isLoggedIn,function(req, res){
            }
         });
        }
-   });
+   });    
+   }else{
+      Hostel_f.findById(req.params.id, function(err, hostel){
+       if(err){
+           console.log(err);
+           res.redirect("/hostels");
+       } else {
+        Comment.create(req.body.comment, function(err, comment){
+           if(err){
+               console.log(err);
+           } else {
+               comment.author.id = req.user._id;
+               comment.author.username = req.user.username;
+               //save comment
+               comment.save();
+               hostel.comments.push(comment);
+               hostel.save();
+               res.redirect('/hostels/' + hostel._id);
+           }
+        });
+       }
+   });    
+
+   }
+
+   
 });
 
 // Comments edit
 router.get('/:comment_id/edit',middleware.checkCommentOwnership,function(req,res){
+  
   Comment.findById(req.params.comment_id, function(err,foundComment){
     if(err){
       res.redirect('back');

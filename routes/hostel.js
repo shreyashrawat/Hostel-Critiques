@@ -1,31 +1,58 @@
 var express = require("express");
 var router  = express.Router();
 var Hostel = require("../models/hostel");
+var Hostel_f = require("../models/hostel_f");
+var middleware = require("../middleware");
 
 //INDEX - show all campgrounds
-router.get("/", function(req, res){
+router.get("/",middleware.isLoggedIn, function(req, res){
     // Get all campgrounds from DB
-    Hostel.find({}, function(err, allHostels){
+    if(res.locals.currentUser.gender == 'M')
+    {
+      Hostel.find({}, function(err, allHostels){
        if(err){
            console.log(err);
        } else {
           res.render("../views/Hostels/index",{hostels: allHostels});
        }
-    });
+      });
+    }else{
+      Hostel_f.find({}, function(err, allHostels){
+       if(err){
+           console.log(err);
+       } else {
+          res.render("../views/Hostels/index_f",{hostels: allHostels});
+       }
+      });
+    }
+    
 });
 
 
 // SHOW - shows more info about one campground
-router.get("/:id", function(req, res){
+router.get("/:id", middleware.isLoggedIn ,function(req, res){
     //find the campground with provided ID
-    Hostel.findById(req.params.id).populate("comments").exec(function(err, foundHostel){
+    if(res.locals.currentUser.gender == 'M')
+    {
+      Hostel.findById(req.params.id).populate("comments").exec(function(err, foundHostel){
         if(err){
             console.log(err);
         } else {
             //render show template with that campground
             res.render("../views/Hostels/show", {hostel: foundHostel});
         }
-    });
+      });  
+    }else{
+      Hostel_f.findById(req.params.id).populate("comments").exec(function(err, foundHostel){
+        if(err){
+            console.log(err);
+        } else {
+            //render show template with that campground
+            res.render("../views/Hostels/show", {hostel: foundHostel});
+        }
+      });  
+    }
+    
 });
 
 module.exports = router;

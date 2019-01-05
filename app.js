@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var Hostel = require("./models/hostel.js");
 var Comment = require("./models/comment.js");
+var Hostel_f = require("./models/hostel_f");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var User = require("./models/user.js");
@@ -11,7 +12,7 @@ var methodOverride = require('method-override');
 var seedDB = require('./seeds');
 var flash = require("connect-flash");
 
-// seedDB();
+ // seedDB();
 
 
 app.use(bodyParser.urlencoded({extended: true}));

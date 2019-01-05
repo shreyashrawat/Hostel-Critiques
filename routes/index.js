@@ -15,15 +15,16 @@ router.get("/register", function(req, res){
 
 //handle sign up logic
 router.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
+    var newUser = new User({username: req.body.username, gender: req.body.gender});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             req.flash("error",err.message);
             return res.render("register");
         }
         passport.authenticate("local")(req, res, function(){
+           console.log(user.gender);
            req.flash("success","Welcome to Hostel Critiques "+user.username)
-           res.redirect("/campgrounds"); 
+           res.redirect("/hostels"); 
         });
     });
 });
