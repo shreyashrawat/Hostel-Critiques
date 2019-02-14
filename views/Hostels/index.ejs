@@ -6,6 +6,21 @@
              <p>Get an insight of all the hostel blocks available for you</p>
          </div>
      </header>
+     <form action='/hostels/filter' method='POST'>
+        <label for="room-select">Choose no of beds:</label>
+
+        <select id="room-select" name='beds'>
+            <option value="">--Please choose an option--</option>
+            <option value="1">Single Bed</option>
+            <option value="2">Double Bed</option>
+            <option value="3">Three Bed</option>
+            <option value="4">Four Bed</option>
+            <option value="6">Six Bed</option>
+        </select>
+        <button>Submit</button>
+     </form>
+     
+
      <div class="row text-center" style="display:flex; flex-wrap: wrap;">
         <% hostels.forEach(function(hostel){ %>
             <div class="col-md-4 col-sm-6">

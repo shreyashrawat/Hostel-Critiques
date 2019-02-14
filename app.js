@@ -12,7 +12,7 @@ var methodOverride = require('method-override');
 var seedDB = require('./seeds');
 var flash = require("connect-flash");
 
- // seedDB();
+ seedDB();
 
 
 app.use(bodyParser.urlencoded({extended: true}));

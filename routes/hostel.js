@@ -28,6 +28,18 @@ router.get("/",middleware.isLoggedIn, function(req, res){
     
 });
 
+router.post("/filter",middleware.isLoggedIn ,function(req,res){
+  bed = req.body.beds;
+  Hostel.find({beds: bed}, function(err, allHostels){
+       if(err){
+           console.log(err);
+       } else {
+          console.log(allHostels);
+          res.render("../views/Hostels/index",{hostels: allHostels});
+       }
+      });
+})
+
 
 // SHOW - shows more info about one campground
 router.get("/:id", middleware.isLoggedIn ,function(req, res){

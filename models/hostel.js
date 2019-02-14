@@ -4,6 +4,7 @@ var hostelschema = new mongoose.Schema({
   name: String,
   image: String,
   description: String,
+  beds: Array,
   author: {
       id: {
          type: mongoose.Schema.Types.ObjectId,
