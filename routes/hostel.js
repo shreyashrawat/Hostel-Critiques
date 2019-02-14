@@ -29,8 +29,7 @@ router.get("/",middleware.isLoggedIn, function(req, res){
 });
 
 router.post("/filter",middleware.isLoggedIn ,function(req,res){
-  bed = req.body.beds;
-  Hostel.find({beds: bed}, function(err, allHostels){
+  Hostel.find({beds: req.body.beds}, function(err, allHostels){
        if(err){
            console.log(err);
        } else {

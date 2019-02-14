@@ -1,0 +1,28 @@
+{
+  "name": "hostel-critiques",
+  "version": "1.0.0",
+  "description": "It is a structured website for the students of Vellore Institute Of Technology to view the information about the various hostels available after logging in. They can also rate any particular hostel and comment on it which will be very useful for other members It has a landing page which then takes you ot the index page where you can view all the hostels and then can open each one and rate or comment on it.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreyashrawat/Hostel-Critiques.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shreyashrawat/Hostel-Critiques/issues"
+  },
+  "homepage": "https://github.com/shreyashrawat/Hostel-Critiques#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "express": "^4.16.4",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.4.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
+}
