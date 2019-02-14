@@ -13,7 +13,9 @@ var Comment   = require("./models/comment");
 
         beds: [2,4],
 
-        description:"A Block VIT offers both AC as well as non-AC rooms.<li>hi</li>"
+        description:"A Block VIT offers both AC as well as non-AC rooms.",
+
+        pros: "Nice athmosphere , Stadium right in front , Has a good shop"
 
     },
     {

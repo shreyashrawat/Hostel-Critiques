@@ -16,6 +16,13 @@
                     <h4 class="pull-right">5/10</h4>
                     <h4><a><%=hostel.name%></a></h4>
                     <p><%= hostel.description %></p>
+                    <ul>
+                        <% hostel.pros.split(',').forEach(function(pro){ %>
+
+
+                                <%= pro %>
+                        <% }) %>
+                    </ul>
                 </div>
             </div>
             <div class="well">
